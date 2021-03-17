@@ -20,9 +20,12 @@ let computerPaddleYVelocity = 1;
 // Ball position and velocity
 const moveBall = document.querySelector('.ball');
 moveBall.style.borderRadius = "50%"
-let ballHorizontalMov = .5;
-let ballVerticalMov = .5;
-let ballVelocity = 1;
+let moveX = 1;
+let moveY = 1;
+let velocityX = 3;
+let velocityY = 1;
+let dy = -3;
+let dx = -3;
 
 // Update the pong world
 function update() {
@@ -36,32 +39,13 @@ function update() {
     computerPaddle.style.top = `${computerPaddleYPosition}px`;
 //------------------------------------------------------------------------------------------------------------------
 //                        ball  
-    ballPosition = ballVerticalMov + ballVelocity
-    
-    ballHorizontalMov++;
-    ballVerticalMov++;
-
-    if (ballHorizontalMov >= GAME_AREA_WIDTH){
-        ballHorizontalMov = ballVelocity * -1
-    }
-    if (ballVerticalMov >= GAME_AREA_HEIGHT){
-        ballVerticalMov -= 25
-    }
-    if (ballHorizontalMov <= GAME_AREA_WIDTH){
-        ballHorizontalMov += 1
-    }
-    if (ballVerticalMov <= GAME_AREA_HEIGHT){
-        ballVerticalMov += 1
-    }
-
-    ballPosition = ballPosition % (GAME_AREA_HEIGHT - GAME_AREA_WIDTH);
-    
-    //this is the ball movement
-    ballHorizontalMov = ballHorizontalMov + ballVelocity;
-    ballVerticalMov = ballVerticalMov + ballVelocity;
-    
-    moveBall.style.top = `${ballVerticalMov}px`;
-    moveBall.style.left = `${ballHorizontalMov}px`;
+    moveX += velocityX;
+    moveBall.style.left = `${moveX}px`;
+    if (moveX >= GAME_AREA_WIDTH){
+        velocityX = dx;
+    } else if (moveX >= GAME_AREA_WIDTH){
+        velocityX = 3;
+}
 }
 
 // Call the update() function everytime the browser is ready to re-render
