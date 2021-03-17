@@ -22,10 +22,8 @@ const moveBall = document.querySelector('.ball');
 moveBall.style.borderRadius = "50%"
 let moveX = 1;
 let moveY = 1;
-let velocityX = 3;
-let velocityY = 1;
-let dy = -3;
-let dx = -3;
+let dy = 3;
+let dx = 3;
 
 // Update the pong world
 function update() {
@@ -39,14 +37,24 @@ function update() {
     computerPaddle.style.top = `${computerPaddleYPosition}px`;
 //------------------------------------------------------------------------------------------------------------------
 //                        ball  
-    moveX += velocityX;
+    moveX += dx;
     moveBall.style.left = `${moveX}px`;
     if (moveX >= GAME_AREA_WIDTH){
-        velocityX = dx;
-    } else if (moveX >= GAME_AREA_WIDTH){
-        velocityX = 3;
-}
-}
+        dx = dx * -1;
+    } else if (moveX <= 0){
+        dx = dx * -1;
+    }
+    
+
+    moveY += dy;
+    moveBall.style.top = `${moveY}px`;
+    if (moveY >= GAME_AREA_HEIGHT){
+        dy = dy * -1;
+    } else if (moveY <= 0){
+        dy = dy * -1;
+    }
+
+    }
 
 // Call the update() function everytime the browser is ready to re-render
 function loop() {
